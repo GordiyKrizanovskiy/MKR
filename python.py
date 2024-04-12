@@ -15,3 +15,7 @@ def read_product_data(filename, product_name):
                 product_prices[date].append(price)
     
     return product_prices
+
+product_name = "Товар А"
+filename = "data.txt"
+prices = read_product_data(filename, product_name)
