@@ -18,3 +18,12 @@ def test_read_product_data():
     product_name = 'Товар А'
     # Assume file handling and CSV reading are correct and focus on function logic
     assert read_product_data(filename, product_name) == product_data()
+
+# Parametrized test for get_price_change_last_month function
+@pytest.mark.parametrize("prices, expected", [
+    ({datetime.today().date(): [100.0, 105.0]}, 5.0),  # Only recent prices
+    ({}, 'No data available for the last month'),       # No data case
+    ({(datetime.today() - timedelta(days=40)).date(): [90.0]}, 'No data available for the last month')  # Old data
+])
+def test_get_price_change_last_month(prices, expected):
+    assert get_price_change_last_month(prices) == expected
